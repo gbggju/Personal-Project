@@ -29,6 +29,7 @@ def sendEmail():
     user = "chiagochi419@gmail.com"
     password = "Xancuts223*"
 
+    
     server = smptlib.SMTP("smtp.gmail.com", 587)
     server.stattls()
     server.login(user, password)
