@@ -5,7 +5,7 @@ from email.message import EmailMessage
 print("Hello, Welcome to the local FIM, please enter the file path you would like to monitor")
 filePath = input("Enter file path(ex. /home/downloads/passwords): ")
 usrEmail = input("Enter your email")
-usrPasswd = input("Enter your password that you set up in your email app password")
+usrPasswd = input("Enter your password that you set up ")
 print("Make sure two factor authentication is on")
 
 
@@ -25,9 +25,6 @@ def sendEmail():
     alert['subject'] = "one of your files have been tampered with David"
     alert['from'] = usrEmail
     alert['to'] = usrEmail
-
-    user = "chiagochi419@gmail.com"
-    password = "DanielC1205*"
 
     
     server = smptlib.SMTP("smtp.gmail.com", 587)
