@@ -27,7 +27,7 @@ def sendEmail():
     alert['to'] = usrEmail
 
     user = "chiagochi419@gmail.com"
-    password = "Xancuts223*"
+    password = "DanielC1205*"
 
     
     server = smptlib.SMTP("smtp.gmail.com", 587)
