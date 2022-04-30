@@ -1,52 +1,44 @@
+
+
+
 import hashlib
 import smtplib
 from email.message import EmailMessage
 
-print("Hello, Welcome to the local FIM, please enter the file path you would like to monitor")
+print("Hello to local FIM, please enter the file path to monitor")
 filePath = input("Enter file path(ex. /home/downloads/passwords): ")
 usrEmail = input("Enter your email")
-usrPasswd = input("Enter your password that you set up ")
+usrPasswd = input("Enter your password")
 print("Make sure two factor authentication is on")
-
-
-
-filePath = input("Enter file path(ex. /home/downloads/passwords): ")
 def getHash(filePath):
-        sha2 = hashlib.sha2
-        with open(filePath, 'rb') as file:
-            hash = file.read()
-            sha2.update(hash)
-            return sha2.hexadigest()
-
+    sha256 = hashlib.sha256()
+    with open(filePath,'rb') as file:
+        hash = file.read()
+        sha256.update(hash)
+        return sha256.hexdigest()
+from email.message import EmailMessage
 
 def sendEmail():
-    alert = EmailMssg()
-    alert.set_content(" ")
-    alert['subject'] = "one of your files have been tampered with David"
-    alert['from'] = usrEmail
-    alert['to'] = usrEmail
-
-    
-    server = smptlib.SMTP("smtp.gmail.com", 587)
-    server.stattls()
-    server.login(user, password)
+    message = EmailMessage()
+    message.set_content(" ")
+    message['subject'] = "file has ben altered"
+    message['from'] = usrEmail
+    message['to'] = usrEmail
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login(usrEmail, usrPasswd)
     server.send_message(message)
+    server.quit()
 
-    sever.quit()
-
-
-original = getHash(filePath)
+baseline = getHash(filePath)
+print("[+] Just calculated your baseline")
+print("[+] Checking")
 while True:
     check = getHash(filePath)
-    if check != original:
-        print ("[+] file has been tampered")
-    original = check            
+    if check != baseline:
+        sendEmail()
+        print("[+] Someone edited the file")
+        baseline = check
 
 
 
-
-#sources:
-#https://betterprogramming.pub/how-to-create-a-file-integrity-monitor-with-python-3e4bba66f4cf
-#https://www.youtube.com/watch?v=B1IsCbXp0uE
-#https://www.youtube.com/watch?v=WJODYmk4ys8&t=375s
-#https://www.solarwinds.com/security-event-manager/use-cases/file-integrity-monitoring-software
