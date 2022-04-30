@@ -40,5 +40,8 @@ while True:
         print("[+] Someone edited the file")
         baseline = check
 
-
+# https://www.youtube.com/watch?v=B1IsCbXp0uE
+# #https://www.youtube.com/watch?v=WJODYmk4ys8&t=375s
+# #https://www.solarwinds.com/security-event-manager/use-cases/file-integrity-monitoring-software
+# https://sciencevikinglabs.com/blog/security/2015-10-03-building-a-basic-file-integrity-monitor/
 
